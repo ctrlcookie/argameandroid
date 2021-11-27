@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/SamplesResources/Scenes/3-GroundPlane.unity
+    path: Assets/shi/SamplesResources/Scenes/3-GroundPlane.unity
     guid: 3151807591542436f9ddfbf021a1545d
   - enabled: 0
     path: 
