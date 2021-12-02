@@ -157,6 +157,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4ff841afe5c96641a14127e8ecd8ff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSolid: 0
+  isLiquid: 0
+  isGas: 0
+  isConstantHeat: 0
   isFlammable: 0
   isBurnable: 0
   isWettable: 0
@@ -165,20 +169,45 @@ MonoBehaviour:
   isCurrentlyOnFire: 0
   isCurrentlyWet: 0
   currentTemp: -12
+  baseTemp: 0
   freezingPoint: 0
   boilingPoint: 0
   dryingPoint: 0
   combustionPoint: 0
   burnPoint: 0
-  conductivity: 0.1
+  baseConductivity: 1
+  fireConductivity: 1
+  wetConductivity: 0
+  conductivity: 1
   Materials:
-  - {fileID: 2100000, guid: d96b6a5d84a0246408a76316571f4073, type: 2}
-  - {fileID: 2100000, guid: dab926430d15fd242b83fbcf064f2ec5, type: 2}
-  - {fileID: 2100000, guid: 8206de4ed5b0b004fbe57210e7e031f2, type: 2}
-  - {fileID: 2100000, guid: 54dbb6a4c9c33724498dbdeb58eaade6, type: 2}
-  - {fileID: 2100000, guid: 36353fdfe0ecda541aaab31a1ab21947, type: 2}
-  - {fileID: 2100000, guid: fc3d094ee46804d4bb65e899ed206097, type: 2}
-  - {fileID: 2100000, guid: 9776b7595aeb81f42bae08976f66ab61, type: 2}
+    serializedVersion: 2
+    key0: {r: 0, g: 1, b: 0.8430972, a: 1}
+    key1: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
+    key2: {r: 0.49056602, g: 0.24759702, b: 0.24759701, a: 0.13725491}
+    key3: {r: 0.7169812, g: 0, b: 0.044811323, a: 0.13725491}
+    key4: {r: 1, g: 0, b: 0.08928585, a: 0.13725491}
+    key5: {r: 1, g: 0.6650944, b: 0.7114659, a: 0.13725491}
+    key6: {r: 1, g: 1, b: 1, a: 0.13725491}
+    key7: {r: 1, g: 1, b: 1, a: 0.13725491}
+    ctime0: 0
+    ctime1: 5975
+    ctime2: 10794
+    ctime3: 17733
+    ctime4: 23516
+    ctime5: 37972
+    ctime6: 53199
+    ctime7: 65535
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 8
+    m_NumAlphaKeys: 2
 --- !u!65 &30590734
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -380,6 +409,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4ff841afe5c96641a14127e8ecd8ff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSolid: 0
+  isLiquid: 0
+  isGas: 0
+  isConstantHeat: 0
   isFlammable: 0
   isBurnable: 0
   isWettable: 0
@@ -388,24 +421,45 @@ MonoBehaviour:
   isCurrentlyOnFire: 0
   isCurrentlyWet: 0
   currentTemp: 670
+  baseTemp: 0
   freezingPoint: 0
   boilingPoint: 0
   dryingPoint: 0
   combustionPoint: 0
   burnPoint: 0
-  conductivity: 0.05
+  baseConductivity: 1
+  fireConductivity: 1
+  wetConductivity: 0
+  conductivity: 1
   Materials:
-  - {fileID: 2100000, guid: d96b6a5d84a0246408a76316571f4073, type: 2}
-  - {fileID: 2100000, guid: 8206de4ed5b0b004fbe57210e7e031f2, type: 2}
-  - {fileID: 2100000, guid: 28400d31e3b87f14ba03db8a09debbc4, type: 2}
-  - {fileID: 2100000, guid: 54dbb6a4c9c33724498dbdeb58eaade6, type: 2}
-  - {fileID: 2100000, guid: 36353fdfe0ecda541aaab31a1ab21947, type: 2}
-  - {fileID: 2100000, guid: 36353fdfe0ecda541aaab31a1ab21947, type: 2}
-  - {fileID: 2100000, guid: fc3d094ee46804d4bb65e899ed206097, type: 2}
-  - {fileID: 2100000, guid: fc3d094ee46804d4bb65e899ed206097, type: 2}
-  - {fileID: 2100000, guid: 9776b7595aeb81f42bae08976f66ab61, type: 2}
-  - {fileID: 2100000, guid: 9776b7595aeb81f42bae08976f66ab61, type: 2}
-  - {fileID: 2100000, guid: 950f3e1c6f4c8104aa3175fad7fc24cc, type: 2}
+    serializedVersion: 2
+    key0: {r: 0, g: 1, b: 0.8430972, a: 1}
+    key1: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
+    key2: {r: 0.49056602, g: 0.24759702, b: 0.24759701, a: 0.13725491}
+    key3: {r: 0.7169812, g: 0, b: 0.044811323, a: 0.13725491}
+    key4: {r: 1, g: 0, b: 0.08928585, a: 0.13725491}
+    key5: {r: 1, g: 0.6650944, b: 0.7114659, a: 0.13725491}
+    key6: {r: 1, g: 1, b: 1, a: 0.13725491}
+    key7: {r: 1, g: 1, b: 1, a: 0.13725491}
+    ctime0: 0
+    ctime1: 5975
+    ctime2: 10794
+    ctime3: 17733
+    ctime4: 23516
+    ctime5: 37972
+    ctime6: 53199
+    ctime7: 65535
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 8
+    m_NumAlphaKeys: 2
 --- !u!54 &130075217
 Rigidbody:
   m_ObjectHideFlags: 0

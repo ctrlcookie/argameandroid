@@ -32,7 +32,7 @@ public class ObjectBehaviour : MonoBehaviour
     public float conductivity;
 
     [Header("for testing purposes (will be deleted)")]
-    public Material[] Materials;
+    public Gradient Materials;
 
     Material mat;
 
@@ -53,8 +53,11 @@ public class ObjectBehaviour : MonoBehaviour
             StartCoroutine( startTransferringTemp(otherObject));
         }
 
-        float tempNormalized = currentTemp.map(-100, 1000, 0, Materials.Length - 1);
+        float tempNormalized = currentTemp.map(-100, 1000, 0, 1);
         float tempNormalized2 = currentTemp.map(-100, 1000, 0, 1);//Materials.Length - 1);
+
+       // mat.color = Materials.Evaluate (tempNormalized);
+        
         //mat.Lerp(mat, Materials[(int)tempNormalized], tempNormalized2);
         //mat.SetColor ("
 
