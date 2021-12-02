@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class ObjectBehaviour : MonoBehaviour
 {
+    public bool isSolid; //for boiling and freezing purposes
+    public bool isLiquid;
+    public bool isGas;
+    public bool isConstantHeat;
+    [Space]
     public bool isFlammable;
     public bool isBurnable;
     public bool isWettable;
@@ -14,12 +19,16 @@ public class ObjectBehaviour : MonoBehaviour
     public bool isCurrentlyWet;
     [Space]
     public float currentTemp;
+    public float baseTemp;
     public float freezingPoint;
     public float boilingPoint;
     public float dryingPoint;
     public float combustionPoint;
     public float burnPoint;
 
+    public float baseConductivity;
+    public float fireConductivity = 1;
+    public float wetConductivity;
     public float conductivity;
 
     [Header("for testing purposes (will be deleted)")]
@@ -46,25 +55,60 @@ public class ObjectBehaviour : MonoBehaviour
 
         float tempNormalized = currentTemp.map(-100, 1000, 0, Materials.Length - 1);
         float tempNormalized2 = currentTemp.map(-100, 1000, 0, 1);//Materials.Length - 1);
-        mat.Lerp(mat, Materials[(int)tempNormalized], tempNormalized2);
-        mat.SetColor ("
+        //mat.Lerp(mat, Materials[(int)tempNormalized], tempNormalized2);
+        //mat.SetColor ("
 
         if (isFlammable)
         {
-            if (currentTemp > combustionPoint)
+            if (currentTemp > combustionPoint) 
             {
                 isCurrentlyOnFire = true;
             }
+
+            if(isTouching && isCurrentlyOnFire) //fire heats shit up faster
+            {
+                conductivity = fireConductivity;
+            }
+            else
+            {
+                conductivity = baseConductivity; //otherwise normal conductivity
+            }
         }
 
-        if (isBurnable && currentTemp > burnPoint)
+        if(isTouching && otherObject.isCurrentlyWet && isSolid && isWettable) //sets a drying point if made wet
+        {
+            isCurrentlyWet = true;
+            dryingPoint = baseTemp + 20;
+        }
+
+        if(isCurrentlyWet && dryingPoint <= currentTemp) //dries objects
+        {
+            isCurrentlyWet = false;
+        }
+
+        if (isBurnable && currentTemp > burnPoint) //destroys burnables
         {
             isCurrentlyDestroyed = true;
         }
 
-        if (currentTemp < freezingPoint)
+        if (currentTemp < freezingPoint) //freezes
         {
             Freeze();
+        }
+
+        if (isCurrentlyWet || isLiquid) //changes conductivity
+        {
+            conductivity = wetConductivity;
+        }
+
+        else
+        {
+            conductivity = baseConductivity;
+        }
+
+        if (isConstantHeat) //checks if it's a heater/freezer
+        {
+            currentTemp = baseTemp;
         }
     }
 

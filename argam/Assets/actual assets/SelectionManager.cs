@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SelectionManager : MonoBehaviour
 {
+    public GameObject moveableObject;
     [SerializeField] public Material highlightMaterial;
     [SerializeField] private Material defaultMaterial;
     [SerializeField] private string selectableTag = "Selectable";
@@ -24,6 +25,7 @@ public class SelectionManager : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             var selection = hit.transform;
+            moveableObject = selection.gameObject;
 
             if (selection.CompareTag(selectableTag))
             {
