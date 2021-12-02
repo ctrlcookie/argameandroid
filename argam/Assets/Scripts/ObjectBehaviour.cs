@@ -25,11 +25,14 @@ public class ObjectBehaviour : MonoBehaviour
     public float dryingPoint;
     public float combustionPoint;
     public float burnPoint;
-
+    [Space]
     public float baseConductivity;
     public float fireConductivity = 1;
     public float wetConductivity;
-    public float conductivity;
+
+    [Space]
+    public GameObject Fire;
+    public GameObject fireInstance;
 
     [Header("for testing purposes (will be deleted)")]
     public Gradient Materials;
@@ -37,8 +40,11 @@ public class ObjectBehaviour : MonoBehaviour
     Material mat;
 
     //-------------------
+    float conductivity;
+
     bool canConduct = true;
     bool isTouching;
+    bool hasaddedFire;
     ObjectBehaviour otherObject;
 
     void Start()
@@ -50,25 +56,44 @@ public class ObjectBehaviour : MonoBehaviour
     {
         if (isTouching && canConduct)
         {
-            StartCoroutine( startTransferringTemp(otherObject));
+            StartCoroutine(startTransferringTemp(otherObject));
         }
 
         float tempNormalized = currentTemp.map(-100, 1000, 0, 1);
         float tempNormalized2 = currentTemp.map(-100, 1000, 0, 1);//Materials.Length - 1);
 
-       // mat.color = Materials.Evaluate (tempNormalized);
-        
+        if (!gameObject.CompareTag("Plate"))
+        {
+            mat.color = Materials.Evaluate(tempNormalized);
+        }
+
         //mat.Lerp(mat, Materials[(int)tempNormalized], tempNormalized2);
         //mat.SetColor ("
 
         if (isFlammable)
         {
-            if (currentTemp > combustionPoint) 
+            if (currentTemp > combustionPoint)
             {
                 isCurrentlyOnFire = true;
+                if (!hasaddedFire)
+                {
+                    hasaddedFire = true;
+                    GameObject fireInstance = Instantiate(Fire, transform.position, transform.rotation).gameObject;
+                    fireInstance.transform.parent = transform;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    if (transform.GetChild(i).gameObject.CompareTag("Fire") == true)
+                    {
+                        Destroy(transform.GetChild(i).gameObject);
+                    }
+                }
             }
 
-            if(isTouching && isCurrentlyOnFire) //fire heats shit up faster
+            if (isTouching && isCurrentlyOnFire) //fire heats shit up faster
             {
                 conductivity = fireConductivity;
             }
@@ -78,13 +103,13 @@ public class ObjectBehaviour : MonoBehaviour
             }
         }
 
-        if(isTouching && otherObject.isCurrentlyWet && isSolid && isWettable) //sets a drying point if made wet
+        if (isTouching && otherObject.isCurrentlyWet && isSolid && isWettable) //sets a drying point if made wet
         {
             isCurrentlyWet = true;
             dryingPoint = baseTemp + 20;
         }
 
-        if(isCurrentlyWet && dryingPoint <= currentTemp) //dries objects
+        if (isCurrentlyWet && dryingPoint <= currentTemp) //dries objects
         {
             isCurrentlyWet = false;
         }
@@ -121,9 +146,9 @@ public class ObjectBehaviour : MonoBehaviour
         float tempDiff = Mathf.Abs(other.currentTemp - currentTemp);
         if (conductsTemp && other.conductsTemp)
         {
-            
+
             canConduct = false;
-            
+
             if (tempDiff > 1)
             {
                 if (currentTemp < other.currentTemp) //if our temp is lower than theirs, then increase ours and reduce theirs
