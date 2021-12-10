@@ -27,8 +27,10 @@ public class ObjectBehaviour : MonoBehaviour
     public float burnPoint;
     [Space]
     public float baseConductivity;
-    public float fireConductivity = 1;
-    public float wetConductivity;
+    public float fireConductivityMuliplier = 5; // how much to affect our normal conductvity
+    public float wetConductivityMultiplier = 0.5f;
+    float fireConductivity;
+    float wetConductivity;
 
     [Space]
     public GameObject Fire;
@@ -36,11 +38,15 @@ public class ObjectBehaviour : MonoBehaviour
 
     [Header("for testing purposes (will be deleted)")]
     public Gradient Materials;
+    public AnimationCurve emmisionAmount;
+    public AnimationCurve tempDifferenceMulitplerCurve;
 
     Material mat;
 
     //-------------------
-    float conductivity;
+    [SerializeField] float conductivity;
+    [SerializeField] float tempDifferenceMultiplier;
+    [SerializeField] float ambientTemperatureLossAmount;
 
     bool canConduct = true;
     bool isTouching;
@@ -50,116 +56,155 @@ public class ObjectBehaviour : MonoBehaviour
     void Start()
     {
         mat = GetComponent<MeshRenderer>().material;
+        mat.EnableKeyword("_EMISSION");
+
+        currentTemp = baseTemp;
     }
 
     void FixedUpdate()
     {
-        if (isTouching && canConduct)
+        if (!isConstantHeat)
         {
-            StartCoroutine(startTransferringTemp(otherObject));
-        }
-
-        float tempNormalized = currentTemp.map(-100, 1000, 0, 1);
-        float tempNormalized2 = currentTemp.map(-100, 1000, 0, 1);//Materials.Length - 1);
-
-        if (!gameObject.CompareTag("Plate"))
-        {
-            mat.color = Materials.Evaluate(tempNormalized);
-        }
-
-        //mat.Lerp(mat, Materials[(int)tempNormalized], tempNormalized2);
-        //mat.SetColor ("
-
-        if (isFlammable)
-        {
-            if (currentTemp > combustionPoint)
+            ambientTemperatureLossAmount = (tempDifferenceMulitplerCurve.Evaluate(Mathf.Abs(currentTemp - 20)) * 200) / 100000;
+            //ambient temperature loss
+            if (currentTemp > 20)
             {
-                isCurrentlyOnFire = true;
-                if (!hasaddedFire)
-                {
-                    hasaddedFire = true;
-                    GameObject fireInstance = Instantiate(Fire, transform.position, transform.rotation).gameObject;
-                    fireInstance.transform.parent = transform;
-                }
+                currentTemp -= ambientTemperatureLossAmount;
+                //currentTemp -= 0.001f;
             }
             else
             {
-                for (int i = 0; i < transform.childCount; i++)
+                currentTemp += ambientTemperatureLossAmount;
+            }//room temp
+            
+
+            fireConductivity = baseConductivity * fireConductivityMuliplier;
+            wetConductivity = baseConductivity * wetConductivityMultiplier;
+            if (isTouching && canConduct)
+            {
+                StartCoroutine(startTransferringTemp(otherObject));
+            }
+
+            float tempNormalized = currentTemp.map(-200, 1300, 0, 1);
+            float tempNormalized2 = currentTemp.map(-100, 1000, 0, 1);//Materials.Length - 1);
+
+
+            mat.color = Materials.Evaluate(tempNormalized);
+            mat.SetColor("_EmissionColor", Materials.Evaluate(tempNormalized) * emmisionAmount.Evaluate(currentTemp));
+
+
+            //mat.Lerp(mat, Materials[(int)tempNormalized], tempNormalized2);
+            //mat.SetColor ("
+
+            //create flames
+            if (isFlammable)
+            {
+                if (currentTemp > combustionPoint)
                 {
-                    if (transform.GetChild(i).gameObject.CompareTag("Fire") == true)
+                    isCurrentlyOnFire = true;
+                    if (!hasaddedFire)
                     {
-                        Destroy(transform.GetChild(i).gameObject);
+                        //create an instance of the fire prefab (then stop more prefabs from being created with teh "has added fire" bool.
+                        hasaddedFire = true;
+                        GameObject fireInstance = Instantiate(Fire, transform.position, transform.rotation).gameObject;
+                        fireInstance.transform.parent = transform;
                     }
                 }
+                else
+                {
+                    //once we drop below our combustion temp, then check all of the children of this object to
+                    //see if there is a fire prefab there. if so, Get rid of it.
+                    for (int i = 0; i < transform.childCount; i++)
+                    {
+                        if (transform.GetChild(i).gameObject.CompareTag("Fire") == true)
+                        {
+                            Destroy(transform.GetChild(i).gameObject);
+                        }
+                    }
+                }                
             }
 
-            if (isTouching && isCurrentlyOnFire) //fire heats shit up faster
+            if (otherObject != null) //check if we are currently in contact with another object
             {
-                conductivity = fireConductivity;
+                //fire
+                if (otherObject.isCurrentlyOnFire)
+                {
+                    conductivity = fireConductivity;
+                }
+                else if (isCurrentlyWet)
+                {
+                    conductivity = wetConductivity;
+                }
+                else
+                {
+                    conductivity = baseConductivity;
+                }
+
+                if (otherObject.isCurrentlyWet && isSolid && isWettable) //sets a drying point if made wet
+                {
+                    isCurrentlyWet = true;
+                    // dryingPoint = baseTemp + 20;
+                }
             }
             else
             {
-                conductivity = baseConductivity; //otherwise normal conductivity
+                if (!isCurrentlyWet)
+                {
+                    conductivity = baseConductivity;
+                }
+                else
+                {
+                    conductivity = wetConductivity;
+                }
+                //we shouldnt become dry unless we arent touching anything
+                if (isCurrentlyWet && dryingPoint <= currentTemp) //dries objects
+                {
+                    isCurrentlyWet = false;
+                }
+            }
+
+            if (isBurnable && currentTemp > burnPoint) //destroys burnables
+            {
+                destroy();
+            }
+
+            if (currentTemp < freezingPoint) //freezes
+            {
+                Freeze();
             }
         }
-
-        if (isTouching && otherObject.isCurrentlyWet && isSolid && isWettable) //sets a drying point if made wet
-        {
-            isCurrentlyWet = true;
-            dryingPoint = baseTemp + 20;
-        }
-
-        if (isCurrentlyWet && dryingPoint <= currentTemp) //dries objects
-        {
-            isCurrentlyWet = false;
-        }
-
-        if (isBurnable && currentTemp > burnPoint) //destroys burnables
-        {
-            isCurrentlyDestroyed = true;
-        }
-
-        if (currentTemp < freezingPoint) //freezes
-        {
-            Freeze();
-        }
-
-        if (isCurrentlyWet || isLiquid) //changes conductivity
-        {
-            conductivity = wetConductivity;
-        }
-
-        else
-        {
-            conductivity = baseConductivity;
-        }
-
-        if (isConstantHeat) //checks if it's a heater/freezer
-        {
-            currentTemp = baseTemp;
-        }
+        else { currentTemp = baseTemp; }
     }
 
     IEnumerator startTransferringTemp(ObjectBehaviour other)
     {
         //get the difference in their temps
+
         float tempDiff = Mathf.Abs(other.currentTemp - currentTemp);
+
+        tempDifferenceMultiplier = tempDifferenceMulitplerCurve.Evaluate(tempDiff);
+
         if (conductsTemp && other.conductsTemp)
         {
-
             canConduct = false;
 
-            if (tempDiff > 1)
+            if ((!other.isConstantHeat || !isConstantHeat) && tempDiff > 1000)
+            {
+                destroy();
+            }
+
+            if (tempDiff > 0.1f)
             {
                 if (currentTemp < other.currentTemp) //if our temp is lower than theirs, then increase ours and reduce theirs
                 {
-                    currentTemp += conductivity;
-                    other.currentTemp -= other.conductivity;
+                    currentTemp += conductivity * tempDifferenceMultiplier;
+                    other.currentTemp -= other.conductivity * other.tempDifferenceMultiplier;
                 }
                 else
                 {
-                    currentTemp -= conductivity;
-                    other.currentTemp += other.conductivity;
+
+                    currentTemp -= conductivity * tempDifferenceMultiplier;
+                    other.currentTemp += other.conductivity * other.tempDifferenceMultiplier;
                 }
             }
 
@@ -185,6 +230,14 @@ public class ObjectBehaviour : MonoBehaviour
             isTouching = false;
             otherObject = null;
         }
+    }
+
+    void destroy()
+    {
+        // <instansiate ash object>
+        mat.color = Color.black;
+        mat.SetColor("_EmissionColor", Color.black);
+        Destroy(this);
     }
 
     public void Freeze()
