@@ -7,18 +7,18 @@ public class ObjectBehaviour : MonoBehaviour
     public bool isSolid; //for boiling and freezing purposes
     public bool isLiquid;
     public bool isGas;
-    public bool isConstantHeat;
+    public bool isConstantHeat; //for heating platforms and ambient temperatures
     [Space]
-    public bool isFlammable;
+    public bool isFlammable; //basic vars, pretty self explanatory
     public bool isBurnable;
     public bool isWettable;
     public bool conductsTemp;
     [Space]
-    public bool isCurrentlyDestroyed;
+    public bool isCurrentlyDestroyed; 
     public bool isCurrentlyOnFire;
     public bool isCurrentlyWet;
     [Space]
-    public float currentTemp;
+    public float currentTemp; //things to monitor
     public float baseTemp;
     public float freezingPoint;
     public float boilingPoint;
@@ -26,13 +26,13 @@ public class ObjectBehaviour : MonoBehaviour
     public float combustionPoint;
     public float burnPoint;
     [Space]
-    public float baseConductivity;
-    public float fireConductivityMuliplier = 5; // how much to affect our normal conductvity
-    public float wetConductivityMultiplier = 0.5f;
-    float fireConductivity;
+    public float baseConductivity; //this item's base conductivity
+    public float fireConductivityMuliplier = 5; // how much to affect our normal conductvity on fire
+    public float wetConductivityMultiplier = 0.5f; // how much to affect our normal conductvity when wet
+    float fireConductivity; 
     float wetConductivity;
 
-    [Space]
+    [Space] //we on fire?
     public GameObject Fire;
     public GameObject fireInstance;
 
@@ -53,12 +53,12 @@ public class ObjectBehaviour : MonoBehaviour
     bool hasaddedFire;
     ObjectBehaviour otherObject;
 
-    void Start()
+    void Start() 
     {
         mat = GetComponent<MeshRenderer>().material;
         mat.EnableKeyword("_EMISSION");
 
-        currentTemp = baseTemp;
+        currentTemp = baseTemp; 
     }
 
     void FixedUpdate()
@@ -78,9 +78,10 @@ public class ObjectBehaviour : MonoBehaviour
             }//room temp
             
 
-            fireConductivity = baseConductivity * fireConductivityMuliplier;
-            wetConductivity = baseConductivity * wetConductivityMultiplier;
-            if (isTouching && canConduct)
+            fireConductivity = baseConductivity * fireConductivityMuliplier; //handle cond diff
+            wetConductivity = baseConductivity * wetConductivityMultiplier; 
+
+            if (isTouching && canConduct) //transferring own temp
             {
                 StartCoroutine(startTransferringTemp(otherObject));
             }
@@ -140,10 +141,10 @@ public class ObjectBehaviour : MonoBehaviour
                     conductivity = baseConductivity;
                 }
 
-                if (otherObject.isCurrentlyWet && isSolid && isWettable) //sets a drying point if made wet
+                if (otherObject.isCurrentlyWet && isSolid && isWettable) //sets a drying point if made wet, handle this differently
                 {
                     isCurrentlyWet = true;
-                    // dryingPoint = baseTemp + 20;
+                    // dryingPoint = baseTemp + 20; 
                 }
             }
             else
@@ -156,6 +157,7 @@ public class ObjectBehaviour : MonoBehaviour
                 {
                     conductivity = wetConductivity;
                 }
+
                 //we shouldnt become dry unless we arent touching anything
                 if (isCurrentlyWet && dryingPoint <= currentTemp) //dries objects
                 {
