@@ -12,27 +12,27 @@ public class ButtonBehaviour : MonoBehaviour
         moving = GameObject.Find("Selectionmanager").GetComponent<SelectionManager>().moveableObject;
     }
 
-    public void OnButtonPress() //this is incredibly subpar but my little brain decided spaghetti code is okay if my braincells aint working -j
+    public void OnButtonPress() //this is incredibly subpar but my little brain decided spaghetti code is okay if my braincells aint working -J
     {
         if (gameObject.name == "Upbutton") //move "up"
         {
             moving.transform.Translate(Vector3.forward * Time.deltaTime);
-            Debug.Log("Up clicked ");
+            //Debug.Log("Up clicked ");
         }
         if (gameObject.name == "Downbutton") //move "down"
         {
             moving.transform.Translate(Vector3.back * Time.deltaTime);
-            Debug.Log("Down clicked ");
+            //Debug.Log("Down clicked ");
         }
         if (gameObject.name == "Leftbutton") //move "left"
         {
             moving.transform.Translate(Vector3.left * Time.deltaTime);
-            Debug.Log("Left clicked ");
+            //Debug.Log("Left clicked ");
         }
         if (gameObject.name == "Rightbutton") //move "right"
         {
             moving.transform.Translate(Vector3.right * Time.deltaTime);
-            Debug.Log("Right clicked ");
+            //Debug.Log("Right clicked ");
         }
         
     }

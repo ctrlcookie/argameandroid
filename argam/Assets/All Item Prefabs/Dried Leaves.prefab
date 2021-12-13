@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &9192267270690599991
+--- !u!1 &2486615885932708922
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,51 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5233728960005840140}
-  - component: {fileID: 271491282103508066}
-  - component: {fileID: 3604504695556281437}
-  - component: {fileID: 8502912681942707878}
-  - component: {fileID: 4030005354101403864}
-  - component: {fileID: 8288763232548385830}
-  - component: {fileID: 6577640422485391004}
+  - component: {fileID: 1563511419070590209}
+  - component: {fileID: 6834144786875657327}
+  - component: {fileID: 8004726624106226768}
+  - component: {fileID: 3103876867257622187}
+  - component: {fileID: 7709653612695666901}
+  - component: {fileID: 3320524733622502443}
+  - component: {fileID: 458026329881134737}
+  - component: {fileID: 8478277111862782205}
+  - component: {fileID: -7612544718077391903}
   m_Layer: 0
-  m_Name: BaseItemPrefab
+  m_Name: Dried Leaves
   m_TagString: Selectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5233728960005840140
+--- !u!4 &1563511419070590209
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9192267270690599991}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.068, z: 0}
+  m_GameObject: {fileID: 2486615885932708922}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.131, y: 0.068, z: 0.191}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &271491282103508066
+--- !u!33 &6834144786875657327
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9192267270690599991}
+  m_GameObject: {fileID: 2486615885932708922}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &3604504695556281437
+--- !u!23 &8004726624106226768
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9192267270690599991}
+  m_GameObject: {fileID: 2486615885932708922}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -85,13 +87,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!54 &8502912681942707878
+--- !u!54 &3103876867257622187
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9192267270690599991}
+  m_GameObject: {fileID: 2486615885932708922}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -101,65 +103,66 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &4030005354101403864
+--- !u!65 &7709653612695666901
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9192267270690599991}
+  m_GameObject: {fileID: 2486615885932708922}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &8288763232548385830
+--- !u!65 &3320524733622502443
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9192267270690599991}
+  m_GameObject: {fileID: 2486615885932708922}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.00000011920929, z: 0}
---- !u!114 &6577640422485391004
+--- !u!114 &458026329881134737
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9192267270690599991}
+  m_GameObject: {fileID: 2486615885932708922}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ff841afe5c96641a14127e8ecd8ff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSolid: 0
+  isSolid: 1
   isLiquid: 0
   isGas: 0
   isConstantHeat: 0
   isFlammable: 1
-  isBurnable: 0
-  isWettable: 0
-  conductsTemp: 0
+  isBurnable: 1
+  isWettable: 1
+  conductsTemp: 1
   isCurrentlyDestroyed: 0
-  isCurrentlyOnFire: 1
+  isCurrentlyOnFire: 0
   isCurrentlyWet: 0
-  currentTemp: 1729
-  baseTemp: 0
-  freezingPoint: 0
+  isCurrentlyFrozen: 0
+  currentTemp: 10
+  baseTemp: 10
+  freezingPoint: -10
   boilingPoint: 0
-  dryingPoint: 0
-  combustionPoint: 700
-  burnPoint: 0
+  dryingPoint: 20
+  combustionPoint: 120
+  burnPoint: 200
   baseConductivity: 1
-  fireConductivityMuliplier: 0
-  wetConductivityMultiplier: 0
+  fireConductivityMuliplier: 3
+  wetConductivityMultiplier: 0.1
   Fire: {fileID: 3738126453822736387, guid: 8e4fc65d589a67341a81724c49abec40, type: 3}
   fireInstance: {fileID: 0}
   Materials:
@@ -224,3 +227,46 @@ MonoBehaviour:
   conductivity: 0
   tempDifferenceMultiplier: 0
   ambientTemperatureLossAmount: 0
+--- !u!114 &8478277111862782205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2486615885932708922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e211d1cf04b56614e9044bb547bd6367, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectBehaviour: {fileID: 0}
+  parent: {fileID: 0}
+  collidingName: 
+  burning: 0
+  hot: 0
+  charcoalPrefab: {fileID: 3915708308449837032, guid: a9f4c2d397b9a5742b51111313a777d6,
+    type: 3}
+  paperPrefab: {fileID: 630566656133627667, guid: 5eb86849a99545a40a8aacbe928acfb4,
+    type: 3}
+  gluePrefab: {fileID: 8406026967720970701, guid: e85d2ffc2a4cda34eb3abfb063bee819,
+    type: 3}
+  teaBagPrefab: {fileID: 3818272461063365486, guid: b2a63626e2f5bfd4abc9f1ebff0ffa37,
+    type: 3}
+--- !u!114 &-7612544718077391903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2486615885932708922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 492bc0d4645f1f04ca191ddb46058c46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectBehaviour: {fileID: 0}
+  parent: {fileID: 0}
+  collidingName: 
+  teaName: Herbal Tea
+  teaPrefab: {fileID: 1658274477262338433, guid: 8120394d53ba0b9458cb0e5e837e3ead,
+    type: 3}

@@ -23,6 +23,5 @@ public class WinScreenText : MonoBehaviour
         winTime = GameObject.Find("GameStateManager").GetComponent<TimeChecker>().timeElapsed;
 
         textComponent.text = "Time elapsed in game: " + Mathf.RoundToInt(winTime) + "s";
-
     }
 }

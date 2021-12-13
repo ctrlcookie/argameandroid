@@ -17,6 +17,7 @@ public class ObjectBehaviour : MonoBehaviour
     public bool isCurrentlyDestroyed; 
     public bool isCurrentlyOnFire;
     public bool isCurrentlyWet;
+    public bool isCurrentlyFrozen;
     [Space]
     public float currentTemp; //things to monitor
     public float baseTemp;
@@ -172,7 +173,12 @@ public class ObjectBehaviour : MonoBehaviour
 
             if (currentTemp < freezingPoint) //freezes
             {
+                isCurrentlyFrozen = true;
                 Freeze();
+            }
+            else
+            {
+                isCurrentlyFrozen = false;
             }
         }
         else { currentTemp = baseTemp; }

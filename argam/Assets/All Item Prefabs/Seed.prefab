@@ -15,10 +15,10 @@ GameObject:
   - component: {fileID: 6639747679945462687}
   - component: {fileID: 1787913573073164129}
   - component: {fileID: 3494813994479293915}
-  - component: {fileID: 4092971451298756497}
+  - component: {fileID: 4954864860857226640}
   m_Layer: 0
   m_Name: Seed
-  m_TagString: Untagged
+  m_TagString: Selectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1466227015560140656}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.109, y: 0.068, z: 0.135}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children: []
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d094bfb0d09e6c94596232967d2f460a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -151,36 +151,37 @@ MonoBehaviour:
   isCurrentlyDestroyed: 0
   isCurrentlyOnFire: 0
   isCurrentlyWet: 0
-  currentTemp: 0
+  isCurrentlyFrozen: 0
+  currentTemp: 10
   baseTemp: 0
-  freezingPoint: -50
+  freezingPoint: -10
   boilingPoint: 0
-  dryingPoint: 50
-  combustionPoint: 100
-  burnPoint: 150
+  dryingPoint: 40
+  combustionPoint: 170
+  burnPoint: 270
   baseConductivity: 1
-  fireConductivityMuliplier: 5
-  wetConductivityMultiplier: 0.5
-  Fire: {fileID: 0}
+  fireConductivityMuliplier: 3
+  wetConductivityMultiplier: 0.3
+  Fire: {fileID: 3738126453822736387, guid: 8e4fc65d589a67341a81724c49abec40, type: 3}
   fireInstance: {fileID: 0}
   Materials:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
+    key0: {r: 0, g: 1, b: 0.8430972, a: 1}
+    key1: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
+    key2: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 0.13725491}
+    key3: {r: 0.667, g: 0, b: 0.035725243, a: 0.13725491}
+    key4: {r: 0.8018868, g: 0.5091719, b: 0.28368637, a: 0.13725491}
+    key5: {r: 1, g: 1, b: 1, a: 0.13725491}
+    key6: {r: 1, g: 1, b: 1, a: 0.13725491}
+    key7: {r: 1, g: 1, b: 1, a: 0.13725491}
     ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
+    ctime1: 6168
+    ctime2: 15227
+    ctime3: 33346
+    ctime4: 55898
+    ctime5: 65535
+    ctime6: 65535
+    ctime7: 65535
     atime0: 0
     atime1: 65535
     atime2: 0
@@ -190,11 +191,29 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_NumColorKeys: 2
+    m_NumColorKeys: 6
     m_NumAlphaKeys: 2
   emmisionAmount:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: -100
+      value: 0
+      inSlope: 0.0008632693
+      outSlope: 0.0008632693
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.04476095
+    - serializedVersion: 3
+      time: 2000
+      value: 2
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -206,8 +225,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   conductivity: 0
   tempDifferenceMultiplier: 0
-  ambientTemperatureLossAmount: 0
---- !u!114 &4092971451298756497
+  ambientTemperatureLossAmount: 20
+--- !u!114 &4954864860857226640
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -216,6 +235,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1466227015560140656}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be68cb202ac69a44583a8ed5e44a65c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 2daa149f790921544a0cd56345c92fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectBehaviour: {fileID: 0}
+  parent: {fileID: 0}
+  collidingName: 
+  hot: 0
+  cold: 0
+  burning: 0
+  wet: 0
+  plantPrefab: {fileID: 8272481502562906173, guid: 0085b2177f3b52d42a9aea848dacc574,
+    type: 3}
+  mintPrefab: {fileID: 943883437607585723, guid: 902c9424205272244bba3b5b29086d5d,
+    type: 3}
+  gingerPrefab: {fileID: 7108771297136293370, guid: 3eb844d19c33bae4cac68ee9ae49ff39,
+    type: 3}
+  pepperPrefab: {fileID: 313047876287051684, guid: 6863e1be1505123438a6a1a6f14d40be,
+    type: 3}
+  lemonPrefab: {fileID: 4427540004330807834, guid: 42f33d8b5b91d3c4ab26330e77812d8f,
+    type: 3}
+  lotusPrefab: {fileID: 2007071486492280968, guid: 0bf5b4a2967f01846b7cb2b3cd7f0029,
+    type: 3}
+  cactusPrefab: {fileID: 765761833719093616, guid: f58ea1594367e7f479ba92c9e451e7b5,
+    type: 3}

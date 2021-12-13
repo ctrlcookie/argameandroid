@@ -15,10 +15,10 @@ GameObject:
   - component: {fileID: 7389029772252461568}
   - component: {fileID: 2477531577431310078}
   - component: {fileID: 733549026900425796}
-  - component: {fileID: 172020667204574734}
+  - component: {fileID: -7448843929992956633}
   m_Layer: 0
   m_Name: Chemical
-  m_TagString: Untagged
+  m_TagString: Selectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3384192921244810991}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.122, y: 0.068, z: -0.136}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children: []
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f60c1c789bb37a24fa58f134d6feed84, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -145,42 +145,43 @@ MonoBehaviour:
   isGas: 0
   isConstantHeat: 0
   isFlammable: 0
-  isBurnable: 0
+  isBurnable: 1
   isWettable: 0
   conductsTemp: 1
   isCurrentlyDestroyed: 0
   isCurrentlyOnFire: 0
   isCurrentlyWet: 0
-  currentTemp: 0
-  baseTemp: 15
-  freezingPoint: -201
-  boilingPoint: 300
-  dryingPoint: -200
+  isCurrentlyFrozen: 0
+  currentTemp: 5
+  baseTemp: 5
+  freezingPoint: -40
+  boilingPoint: 70
+  dryingPoint: 0
   combustionPoint: 0
   burnPoint: 0
   baseConductivity: 1
-  fireConductivityMuliplier: 5
-  wetConductivityMultiplier: 0.5
-  Fire: {fileID: 0}
+  fireConductivityMuliplier: 0
+  wetConductivityMultiplier: 0
+  Fire: {fileID: 3738126453822736387, guid: 8e4fc65d589a67341a81724c49abec40, type: 3}
   fireInstance: {fileID: 0}
   Materials:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
+    key0: {r: 0, g: 1, b: 0.8430972, a: 1}
+    key1: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
+    key2: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 0.13725491}
+    key3: {r: 0.667, g: 0, b: 0.035725243, a: 0.13725491}
+    key4: {r: 0.8018868, g: 0.5091719, b: 0.28368637, a: 0.13725491}
+    key5: {r: 1, g: 1, b: 1, a: 0.13725491}
+    key6: {r: 1, g: 1, b: 1, a: 0.13725491}
+    key7: {r: 1, g: 1, b: 1, a: 0.13725491}
     ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
+    ctime1: 6168
+    ctime2: 15227
+    ctime3: 33346
+    ctime4: 55898
+    ctime5: 65535
+    ctime6: 65535
+    ctime7: 65535
     atime0: 0
     atime1: 65535
     atime2: 0
@@ -190,11 +191,29 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_NumColorKeys: 2
+    m_NumColorKeys: 6
     m_NumAlphaKeys: 2
   emmisionAmount:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: -100
+      value: 0
+      inSlope: 0.0008632693
+      outSlope: 0.0008632693
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.04476095
+    - serializedVersion: 3
+      time: 2000
+      value: 2
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -206,8 +225,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   conductivity: 0
   tempDifferenceMultiplier: 0
-  ambientTemperatureLossAmount: 0
---- !u!114 &172020667204574734
+  ambientTemperatureLossAmount: 20
+--- !u!114 &-7448843929992956633
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -216,6 +235,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3384192921244810991}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be68cb202ac69a44583a8ed5e44a65c0, type: 3}
+  m_Script: {fileID: 11500000, guid: e029beb889f044d4d8c6266ac56d43f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 0}
+  collidingName: 
+  hot: 0
+  cold: 0
+  saltPrefab: {fileID: 836104005674355029, guid: 34c578f525fc01f4ca75ab60b4364c53,
+    type: 3}
+  gluePrefab: {fileID: 8406026967720970701, guid: e85d2ffc2a4cda34eb3abfb063bee819,
+    type: 3}
+  pulpPrefab: {fileID: 7377026141590207345, guid: 9cea018a6fdb9674e90101a28ccde894,
+    type: 3}
