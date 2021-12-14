@@ -16,6 +16,13 @@ public class SelectionManager : MonoBehaviour
     bool selectin = false; //is the player attempting to select right now
     private Transform _selection; // our selection's transform component
 
+    Camera mainCam;
+
+    private void Start()
+    {
+        mainCam = Camera.main;
+    }
+
     void FixedUpdate()
     {
         var moveableRenderer = moveableObject.GetComponent<Renderer>(); //current selections' renderer
@@ -31,7 +38,7 @@ public class SelectionManager : MonoBehaviour
 
         }
 
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition); //raycast from camera
+        var ray = mainCam.ScreenPointToRay(Input.mousePosition); //raycast from camera
 
         RaycastHit hit; //var for what are we hitting
 

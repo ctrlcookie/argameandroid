@@ -38,6 +38,7 @@ public class ObjectBehaviour : MonoBehaviour
     public GameObject fireInstance;
 
     [Header("for testing purposes (will be deleted)")]
+    public Color BaseColour;
     public Gradient Materials;
     public AnimationCurve emmisionAmount;
     public AnimationCurve tempDifferenceMulitplerCurve;
@@ -90,8 +91,15 @@ public class ObjectBehaviour : MonoBehaviour
             float tempNormalized = currentTemp.map(-200, 1300, 0, 1);
             float tempNormalized2 = currentTemp.map(-100, 1000, 0, 1);//Materials.Length - 1);
 
-
-            mat.color = Materials.Evaluate(tempNormalized);
+            if (currentTemp > 100 || currentTemp < 0)
+            {
+                mat.color = Materials.Evaluate(tempNormalized);
+            }
+            else
+            {
+                mat.color = BaseColour;
+            }
+            
             mat.SetColor("_EmissionColor", Materials.Evaluate(tempNormalized) * emmisionAmount.Evaluate(currentTemp));
 
 
@@ -195,11 +203,6 @@ public class ObjectBehaviour : MonoBehaviour
         if (conductsTemp && other.conductsTemp)
         {
             canConduct = false;
-
-            if ((!other.isConstantHeat || !isConstantHeat) && tempDiff > 1000)
-            {
-                destroy();
-            }
 
             if (tempDiff > 0.1f)
             {
