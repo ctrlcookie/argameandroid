@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 271491282103508066}
   - component: {fileID: 3604504695556281437}
   - component: {fileID: 8502912681942707878}
-  - component: {fileID: 4030005354101403864}
   - component: {fileID: 8288763232548385830}
   - component: {fileID: 6577640422485391004}
   m_Layer: 0
@@ -101,19 +100,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &4030005354101403864
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9192267270690599991}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &8288763232548385830
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -150,6 +136,7 @@ MonoBehaviour:
   isCurrentlyDestroyed: 0
   isCurrentlyOnFire: 1
   isCurrentlyWet: 0
+  isCurrentlyFrozen: 0
   currentTemp: 1729
   baseTemp: 0
   freezingPoint: 0
@@ -162,6 +149,7 @@ MonoBehaviour:
   wetConductivityMultiplier: 0
   Fire: {fileID: 3738126453822736387, guid: 8e4fc65d589a67341a81724c49abec40, type: 3}
   fireInstance: {fileID: 0}
+  BaseColour: {r: 0, g: 0, b: 0, a: 0}
   Materials:
     serializedVersion: 2
     key0: {r: 0, g: 1, b: 0.8430972, a: 1}
@@ -217,7 +205,25 @@ MonoBehaviour:
     m_RotationOrder: 4
   tempDifferenceMulitplerCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 2000
+      value: 10
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

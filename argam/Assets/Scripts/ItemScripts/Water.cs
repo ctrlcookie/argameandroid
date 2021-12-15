@@ -59,6 +59,7 @@ public class Water : MonoBehaviour
 
         if (item == "Ice")
         {
+            GameObject.Find("DestroyZone").GetComponent<DestroyBounds>().aboutToDestroySelection = true;
             Instantiate(icePrefab, this.transform.position + offset, Quaternion.identity, parent);
             Debug.Log("makingice");
             Destroy(gameObject);

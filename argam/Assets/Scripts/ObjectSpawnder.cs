@@ -17,8 +17,8 @@ public class ObjectSpawnder : MonoBehaviour
     public void Start()
     {
         Vector3 offset2 = offset * 2;
-        seedInstance = Instantiate(SeedPrefab, transform.position, transform.rotation);
-        waterInstance = Instantiate (waterPrefab, transform.position + offset, transform.rotation);
-        chemicalInstance = Instantiate (chemicalPrefab, transform.position + offset2, transform.rotation);
+        seedInstance = Instantiate(SeedPrefab, transform.position, transform.rotation, transform);
+        waterInstance = Instantiate (waterPrefab, transform.position + offset, transform.rotation, transform);
+        chemicalInstance = Instantiate (chemicalPrefab, transform.position + offset2, transform.rotation, transform);
     }
 }

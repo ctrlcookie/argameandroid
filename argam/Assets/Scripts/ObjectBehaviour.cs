@@ -57,8 +57,11 @@ public class ObjectBehaviour : MonoBehaviour
 
     void Start() 
     {
-        mat = GetComponent<MeshRenderer>().material;
-        mat.EnableKeyword("_EMISSION");
+        if (!isConstantHeat)
+        {
+            mat = GetComponent<MeshRenderer>().material;
+            mat.EnableKeyword("_EMISSION");
+        }
 
         currentTemp = baseTemp; 
     }
@@ -223,8 +226,8 @@ public class ObjectBehaviour : MonoBehaviour
             canConduct = true;
         }
     }
-
-    void OnCollisionEnter(Collision col)
+    
+    void OnTriggerEnter(Collider col)
     {
 
         if (col.gameObject.GetComponent<ObjectBehaviour>() != null)
@@ -234,7 +237,7 @@ public class ObjectBehaviour : MonoBehaviour
         }
     }
 
-    void OnCollisionExit(Collision col)
+    void OnTriggerExit(Collider col)
     {
         if (col.gameObject.GetComponent<ObjectBehaviour>() != null)
         {

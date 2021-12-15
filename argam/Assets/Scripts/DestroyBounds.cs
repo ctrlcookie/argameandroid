@@ -14,7 +14,7 @@ public class DestroyBounds : MonoBehaviour
 
     void OnTriggerEnter(Collider col) //are we colliding with an object that has a trigger?
     {
-        Debug.Log("destroy");
+        Debug.Log("destroying " + col.name);
 
         if (col.gameObject == moving)
         {

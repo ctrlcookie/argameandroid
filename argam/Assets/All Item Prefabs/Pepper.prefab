@@ -164,6 +164,7 @@ MonoBehaviour:
   wetConductivityMultiplier: 0.3
   Fire: {fileID: 3738126453822736387, guid: 8e4fc65d589a67341a81724c49abec40, type: 3}
   fireInstance: {fileID: 0}
+  BaseColour: {r: 0, g: 0, b: 0, a: 0}
   Materials:
     serializedVersion: 2
     key0: {r: 0, g: 1, b: 0.8430972, a: 1}
@@ -219,7 +220,25 @@ MonoBehaviour:
     m_RotationOrder: 4
   tempDifferenceMulitplerCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 2000
+      value: 10
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
