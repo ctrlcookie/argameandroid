@@ -16,11 +16,14 @@ public class Tea : MonoBehaviour
     [SerializeField]public string teaName;
 
     public GameObject teaPrefab;
+    public GameScore gameScore;
+
 
     void Start()
     {
         objectBehaviour = GetComponent<ObjectBehaviour>();
         parent = GameObject.Find("items").transform;
+        gameScore = GameObject.Find("GameScore").GetComponent<GameScore>();
     }
 
     void FixedUpdate() //all possible craftables
