@@ -134,6 +134,8 @@ public class ObjectBehaviour : MonoBehaviour
                             Destroy(transform.GetChild(i).gameObject);
                         }
                     }
+
+                    isCurrentlyOnFire = false;
                 }                
             }
 

@@ -161,7 +161,7 @@ MonoBehaviour:
   baseConductivity: 1
   fireConductivityMuliplier: 0
   wetConductivityMultiplier: 0
-  Fire: {fileID: 3738126453822736387, guid: 8e4fc65d589a67341a81724c49abec40, type: 3}
+  Fire: {fileID: 6743040886632698462, guid: 136025c6c5eb50b48adee01dcc8a4ea9, type: 3}
   fireInstance: {fileID: 0}
   BaseColour: {r: 0, g: 0, b: 0, a: 0}
   Materials:
