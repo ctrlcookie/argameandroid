@@ -4,21 +4,31 @@ using UnityEngine;
 
 public class ObjectSpawnder : MonoBehaviour
 {
-    public GameObject SeedPrefab;
-    public GameObject waterPrefab;
-    public GameObject chemicalPrefab;
+    public GameObject prefab;
 
-    [SerializeField] GameObject seedInstance;
-    [SerializeField] GameObject waterInstance;
-    [SerializeField] GameObject chemicalInstance;
+    [SerializeField] GameObject instance;
+
+    public bool spawnitnow;
+
+    public Transform spawnPoint;
 
     public Vector3 offset;
 
     public void Start()
     {
-        Vector3 offset2 = offset * 2;
-        seedInstance = Instantiate(SeedPrefab, transform.position, transform.rotation, transform);
-        waterInstance = Instantiate (waterPrefab, transform.position + offset, transform.rotation, transform);
-        chemicalInstance = Instantiate (chemicalPrefab, transform.position + offset2, transform.rotation, transform);
+        InvokeRepeating("spawn", 0, 10);
+
+    }
+
+    void spawn()
+    {
+        spawnitnow = GameObject.Find("SPAWN").GetComponent<fuu>().spawn;
+        if (spawnitnow)
+        {
+            Vector3 offset2 = offset * 2;
+            instance = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation, transform);
+
+        }
+
     }
 }

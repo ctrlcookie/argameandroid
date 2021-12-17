@@ -14,6 +14,8 @@ public class ButtonBehaviour : MonoBehaviour
 
     public void OnButtonPress() //this is incredibly subpar but my little brain decided spaghetti code is okay if my braincells aint working -J
     {
+        FindObjectOfType<AudioManager>().Play("Move");
+
         if (gameObject.name == "Upbutton") //move "up"
         {
             moving.transform.Translate(Vector3.forward * Time.deltaTime);

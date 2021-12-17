@@ -5,11 +5,11 @@ using UnityEngine;
 public class SelectionManager : MonoBehaviour
 {
     public GameObject moveableObject; //current selected object
-    [SerializeField]  public GameObject defaultObject; //object to default to when not selecting anything else/deleting old selection
+    [SerializeField] public GameObject defaultObject; //object to default to when not selecting anything else/deleting old selection
 
-    [SerializeField] public Material highlightMaterial; //material for when we're hovering over an item
-    [SerializeField] public Material defaultMaterial; //variable to store what the object's material was before hovering/selection
-    [SerializeField] public Material currentSelectionMaterial; //material used to show that an item is a current selection (aka visual of what is the moveableObject)
+    //[SerializeField] public Material highlightMaterial; //material for when we're hovering over an item
+    //[SerializeField] public Material defaultMaterial; //variable to store what the object's material was before hovering/selection
+    //[SerializeField] public Material currentSelectionMaterial; //material used to show that an item is a current selection (aka visual of what is the moveableObject)
     [SerializeField] private string selectableTag = "Selectable"; //tag for how we determine what is selectable, ideally we'd be filtering by layer but oh well
     public Transform objectHitDebug; //debug variable showing what we're currently hitting with our raycast
     public bool switchSelect; //boolean taken from DestroyBounds to see if we need to switch selection
@@ -26,13 +26,13 @@ public class SelectionManager : MonoBehaviour
     void FixedUpdate()
     {
         var moveableRenderer = moveableObject.GetComponent<Renderer>(); //current selections' renderer
-        moveableRenderer.material = currentSelectionMaterial; //change objects' material to show that it's selected
+        //moveableRenderer.material = currentSelectionMaterial; //change objects' material to show that it's selected
 
 
         if (_selection != null)
         {
             var selectionRenderer = _selection.GetComponent<Renderer>();
-            selectionRenderer.material = defaultMaterial;
+            //selectionRenderer.material = defaultMaterial;
 
             _selection = null;
 
@@ -58,7 +58,7 @@ public class SelectionManager : MonoBehaviour
                 if (selectin) //is the player trying to select?
                 {
                     //Debug.Log("Selecting");
-                    moveableRenderer.material = defaultMaterial; //change previously selected's material to it's stored default ("unselecting" the old object)
+                    //moveableRenderer.material = defaultMaterial; //change previously selected's material to it's stored default ("unselecting" the old object)
                     moveableObject = selection.gameObject; //change the now selected object from the old one
                 }
 
@@ -66,8 +66,8 @@ public class SelectionManager : MonoBehaviour
 
                 if (selectionRenderer != null) //are we hovering over a selectable object?
                 {
-                    defaultMaterial = selection.GetComponent<Renderer>().material; //store the object's default material
-                    selectionRenderer.material = highlightMaterial; //highlight the material as part of the hover
+                    //defaultMaterial = selection.GetComponent<Renderer>().material; //store the object's default material
+                    //selectionRenderer.material = highlightMaterial; //highlight the material as part of the hover
                 }
 
                 _selection = selection; //we selectin?
@@ -76,12 +76,12 @@ public class SelectionManager : MonoBehaviour
     }
 
     void Update()
-    {   
+    {
         //is the player attempting to select?
         if (Input.GetMouseButtonDown(0))
         {
             selectin = true;
-            
+
         }
         if (Input.GetMouseButtonUp(0))
         {

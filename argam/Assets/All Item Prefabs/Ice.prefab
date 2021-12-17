@@ -31,9 +31,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 676854279917693760}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.114, y: 0.068, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -101,7 +101,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &4690676601906982831
 BoxCollider:
@@ -165,7 +165,11 @@ MonoBehaviour:
   wetConductivityMultiplier: 2
   Fire: {fileID: 6743040886632698462, guid: 136025c6c5eb50b48adee01dcc8a4ea9, type: 3}
   fireInstance: {fileID: 0}
-  BaseColour: {r: 0, g: 0, b: 0, a: 0}
+  BaseColour:
+  - {r: 6.628396e-10, g: 0.00000338566, b: 1.0570378e+21, a: 0.00000021065428}
+  - {r: 6.740581e+22, g: 1.3074244e+22, b: 2.1258515e+20, a: 0.00021495373}
+  - {r: -1.3569402e-19, g: 9.91e-43, b: 2.4e-44, a: 9.91e-43}
+  - {r: 0.0000001669572, g: 9.91e-43, b: 1.0570378e+21, a: 0.00000021065428}
   Materials:
     serializedVersion: 2
     key0: {r: 0, g: 1, b: 0.8430972, a: 1}
@@ -243,6 +247,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  rend:
+  - {fileID: 4967488997792680746}
   conductivity: 0
   tempDifferenceMultiplier: 0
   ambientTemperatureLossAmount: 20
@@ -278,3 +284,4 @@ MonoBehaviour:
   teaName: Ice Tea
   teaPrefab: {fileID: 1658274477262338433, guid: 8120394d53ba0b9458cb0e5e837e3ead,
     type: 3}
+  gameScore: {fileID: 0}

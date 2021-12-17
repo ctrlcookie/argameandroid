@@ -51,17 +51,18 @@ public class Book : MonoBehaviour
         if (hot)
         {
             Craft("Spicy Love Story");
-            GameObject.Find("GameScore").GetComponent<GameScore>().spicyLoveStory = true;
+            GameObject.Find("ScoreManager").GetComponent<ScoreManager>().spicy = true;
+
         }
         else if (wet)
         {
             Craft("Sailor's Story");
-            GameObject.Find("GameScore").GetComponent<GameScore>().sailorsStory = true;
+            GameObject.Find("ScoreManager").GetComponent<ScoreManager>().sailor = true;
         }
         else if (cold)
         {
             Craft("Thriller");
-            GameObject.Find("GameScore").GetComponent<GameScore>().thriller = true;
+            GameObject.Find("ScoreManager").GetComponent<ScoreManager>().thrill = true;
         }
 
 
@@ -70,58 +71,57 @@ public class Book : MonoBehaviour
             if (collidingName == "Ink" || collidingName == "Ink(Clone)" || collidingName == "Charcoal" || collidingName == "Charcoal(Clone)")
             {
                 Craft("Noir");
-                GameObject.Find("GameScore").GetComponent<GameScore>().noir = true;
-
+                GameObject.Find("ScoreManager").GetComponent<ScoreManager>().noir = true;
             }
             if (collidingName == "Pepper" || collidingName == "Pepper(Clone)" || collidingName == "Ginger" || collidingName == "Ginger(Clone)")
             {
                 Craft("Spicy Love Story");
-                GameObject.Find("GameScore").GetComponent<GameScore>().spicyLoveStory = true;
+                GameObject.Find("ScoreManager").GetComponent<ScoreManager>().spicy = true;
             }
             if (collidingName == "Chemical" || collidingName == "Chemical(Clone)")
             {
                 Craft("Scifi");
-                GameObject.Find("GameScore").GetComponent<GameScore>().sciFi = true;
+                GameObject.Find("ScoreManager").GetComponent<ScoreManager>().scifi = true;
             }
             if (collidingName == "Salt" || collidingName == "Salt(Clone)")
             {
                 Craft("Sailor's Story");
-                GameObject.Find("GameScore").GetComponent<GameScore>().sailorsStory = true;
+                GameObject.Find("ScoreManager").GetComponent<ScoreManager>().sailor = true;
             }
             if (collidingName == "Ice" || collidingName == "Ice(Clone)")
             {
                 Craft("Thriller");
-                GameObject.Find("GameScore").GetComponent<GameScore>().thriller = true;
+                GameObject.Find("ScoreManager").GetComponent<ScoreManager>().thrill = true;
             }
             if (collidingName == "Seed" || collidingName == "Plant" || collidingName == "Plant(Clone)")
             {
                 Craft("Botany Guide");
-                GameObject.Find("GameScore").GetComponent<GameScore>().botanyGuide = true;
+                GameObject.Find("ScoreManager").GetComponent<ScoreManager>().botany = true;
             }
             if (collidingName == "Pulp" || collidingName == "Pulp(Clone)")
             {
                 Craft("Pulp Magazine");
-                GameObject.Find("GameScore").GetComponent<GameScore>().pulpMagazine = true;
+                GameObject.Find("ScoreManager").GetComponent<ScoreManager>().pulp = true;
             }
             if (collidingName == "Glue" || collidingName == "Glue(Clone)")
             {
                 Craft("Book You Just Can't Put Down");
-                GameObject.Find("GameScore").GetComponent<GameScore>().cantPutDown = true;
+                GameObject.Find("ScoreManager").GetComponent<ScoreManager>().putdown = true;
             }
             if (collidingName == "Cactus" || collidingName == "Cactus(Clone)")
             {
                 Craft("Wild West Tales");
-                GameObject.Find("GameScore").GetComponent<GameScore>().wildWestTales = true;
+                GameObject.Find("ScoreManager").GetComponent<ScoreManager>().wild = true;
             }
             if (collidingName == "Lotus" || collidingName == "Lotus(Clone)")
             {
                 Craft("Journey To The West");
-                GameObject.Find("GameScore").GetComponent<GameScore>().journeyToTheWest = true;
+                GameObject.Find("ScoreManager").GetComponent<ScoreManager>().journey = true;
             }
             if (collidingName == "Paper" || collidingName == "Paper(Clone)")
             {
                 Craft("Newspaper");
-                GameObject.Find("GameScore").GetComponent<GameScore>().newspaper = true;
+                GameObject.Find("ScoreManager").GetComponent<ScoreManager>().news = true;
             }
         }
     }

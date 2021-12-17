@@ -37,13 +37,14 @@ public class ObjectBehaviour : MonoBehaviour
     public GameObject Fire;
     public GameObject fireInstance;
 
-    [Header("for testing purposes (will be deleted)")]
-    public Color BaseColour;
+    [Space]
+    public Color[] BaseColour;
     public Gradient Materials;
     public AnimationCurve emmisionAmount;
     public AnimationCurve tempDifferenceMulitplerCurve;
 
-    Material mat;
+    public MeshRenderer[] rend;
+    List<Material> mat;
 
     //-------------------
     [SerializeField] float conductivity;
@@ -59,8 +60,13 @@ public class ObjectBehaviour : MonoBehaviour
     {
         if (!isConstantHeat)
         {
-            mat = GetComponent<MeshRenderer>().material;
-            mat.EnableKeyword("_EMISSION");
+            for (int i = 0; i < rend.Length; i++)
+            {
+                //mat[i] = rend[i].material;
+                mat.Add(rend[i].material);
+                mat[i].EnableKeyword("_EMISSION");
+                BaseColour[i] = mat[i].color;
+            }           
         }
 
         currentTemp = baseTemp; 
@@ -92,19 +98,23 @@ public class ObjectBehaviour : MonoBehaviour
             }
 
             float tempNormalized = currentTemp.map(-200, 1300, 0, 1);
-            float tempNormalized2 = currentTemp.map(-100, 1000, 0, 1);//Materials.Length - 1);
 
-            if (currentTemp > 100 || currentTemp < 0)
+            for (int i = 0; i < mat.Count; i++)
             {
-                mat.color = Materials.Evaluate(tempNormalized);
-            }
-            else
-            {
-                mat.color = BaseColour;
-            }
-            
-            mat.SetColor("_EmissionColor", Materials.Evaluate(tempNormalized) * emmisionAmount.Evaluate(currentTemp));
+                if (currentTemp > 100 || currentTemp < 0)
+                {
 
+                    mat[i].color = Materials.Evaluate(tempNormalized);
+                }
+                else
+                {
+
+                    mat[i].color = BaseColour[i];
+
+                }
+
+                mat[i].SetColor("_EmissionColor", Materials.Evaluate(tempNormalized) * emmisionAmount.Evaluate(currentTemp));
+            }
 
             //mat.Lerp(mat, Materials[(int)tempNormalized], tempNormalized2);
             //mat.SetColor ("
@@ -251,8 +261,12 @@ public class ObjectBehaviour : MonoBehaviour
     void destroy()
     {
         // <instansiate ash object>
-        mat.color = Color.black;
-        mat.SetColor("_EmissionColor", Color.black);
+        for (int i = 0; i < mat.Count; i++)
+        {
+            mat[i].color = Color.black;
+            mat[i].SetColor("_EmissionColor", Color.black);
+        }
+        
         Destroy(this);
     }
 
