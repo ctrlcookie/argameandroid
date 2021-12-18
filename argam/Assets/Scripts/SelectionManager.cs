@@ -5,16 +5,21 @@ using UnityEngine;
 public class SelectionManager : MonoBehaviour
 {
     public GameObject moveableObject; //current selected object
+    public GameObject childSelection;
+
     [SerializeField] public GameObject defaultObject; //object to default to when not selecting anything else/deleting old selection
 
+    //the three below broke stuff in the project when material changing was introduced :(
     //[SerializeField] public Material highlightMaterial; //material for when we're hovering over an item
     //[SerializeField] public Material defaultMaterial; //variable to store what the object's material was before hovering/selection
     //[SerializeField] public Material currentSelectionMaterial; //material used to show that an item is a current selection (aka visual of what is the moveableObject)
+
     [SerializeField] private string selectableTag = "Selectable"; //tag for how we determine what is selectable, ideally we'd be filtering by layer but oh well
     public Transform objectHitDebug; //debug variable showing what we're currently hitting with our raycast
     public bool switchSelect; //boolean taken from DestroyBounds to see if we need to switch selection
     bool selectin = false; //is the player attempting to select right now
     private Transform _selection; // our selection's transform component
+
 
     Camera mainCam;
 
@@ -25,6 +30,14 @@ public class SelectionManager : MonoBehaviour
 
     void FixedUpdate()
     {
+
+         childSelection = moveableObject.transform.Find("selected").gameObject;
+
+        if (selectin)
+        {
+            childSelection.GetComponent<SpriteRenderer>().enabled = true;
+        }
+
         var moveableRenderer = moveableObject.GetComponent<Renderer>(); //current selections' renderer
         //moveableRenderer.material = currentSelectionMaterial; //change objects' material to show that it's selected
 
@@ -59,6 +72,9 @@ public class SelectionManager : MonoBehaviour
                 {
                     //Debug.Log("Selecting");
                     //moveableRenderer.material = defaultMaterial; //change previously selected's material to it's stored default ("unselecting" the old object)
+
+                    childSelection.GetComponent<SpriteRenderer>().enabled = false;
+
                     moveableObject = selection.gameObject; //change the now selected object from the old one
                 }
 

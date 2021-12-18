@@ -121,9 +121,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3818272461063365486}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.068, z: 0.131}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalScale: {x: 0.23158687, y: 0.11111112, z: 0.11111112}
   m_Children:
   - {fileID: 3119849410281612735}
   m_Father: {fileID: 0}
@@ -265,6 +265,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   rend:
   - {fileID: 4251611760988249808}
+  mat: []
   conductivity: 0
   tempDifferenceMultiplier: 0
   ambientTemperatureLossAmount: 20
@@ -286,4 +287,3 @@ MonoBehaviour:
   teaName: Breakfast Tea
   teaPrefab: {fileID: 1658274477262338433, guid: 8120394d53ba0b9458cb0e5e837e3ead,
     type: 3}
-  gameScore: {fileID: 0}

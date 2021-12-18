@@ -204,7 +204,7 @@ Transform:
   m_GameObject: {fileID: 5465462361135432508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.068, z: 0.12}
-  m_LocalScale: {x: 0.00227155, y: 0.00227155, z: 0.00227155}
+  m_LocalScale: {x: 0.005047889, y: 0.005047889, z: 0.005047889}
   m_Children:
   - {fileID: 999121824340447265}
   - {fileID: 5686280405978647371}
@@ -347,6 +347,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   rend:
   - {fileID: 5252530151713679642}
+  mat: []
   conductivity: 0
   tempDifferenceMultiplier: 0
   ambientTemperatureLossAmount: 0

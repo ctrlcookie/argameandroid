@@ -7,8 +7,11 @@ public class ObjectSpawnder : MonoBehaviour
     public GameObject prefab;
 
     [SerializeField] GameObject instance;
+    [SerializeField] GameObject itemsparent;
 
-    public bool spawnitnow;
+
+    [SerializeField] public bool spawnitnow;
+    [SerializeField] public bool intheway;
 
     public Transform spawnPoint;
 
@@ -17,18 +20,55 @@ public class ObjectSpawnder : MonoBehaviour
     public void Start()
     {
         InvokeRepeating("spawn", 0, 10);
-
     }
 
     void spawn()
     {
-        spawnitnow = GameObject.Find("SPAWN").GetComponent<fuu>().spawn;
-        if (spawnitnow)
+        //spawnitnow = GameObject.Find("SPAWN").GetComponent<fuu>().spawn;
+        if (spawnitnow && !intheway)
         {
             Vector3 offset2 = offset * 2;
-            instance = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation, transform);
+            instance = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation, itemsparent.transform);
 
         }
 
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        Debug.Log("intrigger");
+
+        if (col.gameObject.tag == "Selectable")
+        {
+            intheway = true;
+        }
+        else
+        {
+            intheway = false;
+
+        }
+    }
+
+    private void OnTriggerStay(Collider col)
+    {
+        Debug.Log("intriggerstay" + col.gameObject.name);
+
+        if (col.gameObject.tag == "Selectable")
+        {
+            intheway = true;
+        }
+        else
+        {
+            intheway = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider col)
+    {
+        Debug.Log("exitingtrigger");
+        if (col.gameObject.tag == "Selectable")
+        {
+            intheway = false;
+        }
     }
 }

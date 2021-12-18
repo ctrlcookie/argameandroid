@@ -44,7 +44,7 @@ public class ObjectBehaviour : MonoBehaviour
     public AnimationCurve tempDifferenceMulitplerCurve;
 
     public MeshRenderer[] rend;
-    List<Material> mat;
+    public List<Material> mat;
 
     //-------------------
     [SerializeField] float conductivity;
@@ -266,8 +266,9 @@ public class ObjectBehaviour : MonoBehaviour
             mat[i].color = Color.black;
             mat[i].SetColor("_EmissionColor", Color.black);
         }
-        
-        Destroy(this);
+
+        Debug.Log("destroying " + this.gameObject.name);
+        //Destroy(gameObject);
     }
 
     public void Freeze()
