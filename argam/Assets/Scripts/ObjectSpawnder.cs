@@ -4,71 +4,110 @@ using UnityEngine;
 
 public class ObjectSpawnder : MonoBehaviour
 {
-    public GameObject prefab;
+    public GameObject chemical;
+    public GameObject Seed;
+    public GameObject Water;
 
-    [SerializeField] GameObject instance;
-    [SerializeField] GameObject itemsparent;
+    public Transform chemicalSpawnPoint;
+    public Transform SeedSpawnPoint;
+    public Transform WaterSpawnPoint;
+
+    public Transform latestChemical;
+    public Transform latestSeed;
+    public Transform latestWater;
 
 
-    [SerializeField] public bool spawnitnow;
-    [SerializeField] public bool intheway;
+    public fuu fuu_;
 
-    public Transform spawnPoint;
+    int timer;
 
-    public Vector3 offset;
+    public float maximumDistance;
+
+    bool ChemicalinRange = true;
+    bool seedinRange = true;
+    bool waterinRange = true;
 
     public void Start()
     {
-        InvokeRepeating("spawn", 0, 10);
+        timer = 5;
+        InvokeRepeating("reduceTimer", 0, 1);
+    }
+
+    public void reset()
+    {
+        timer = 5;
+        spawn();
+    }
+
+    void reduceTimer()
+    {
+        if (timer == 0)
+        {
+            timer = 5;
+            spawn();
+        }
+        else
+        {
+            timer--;
+        }
+        
     }
 
     void spawn()
     {
-        //spawnitnow = GameObject.Find("SPAWN").GetComponent<fuu>().spawn;
-        if (spawnitnow && !intheway)
+        if (ChemicalinRange)
         {
-            Vector3 offset2 = offset * 2;
-            instance = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation, itemsparent.transform);
-
+            latestChemical = Instantiate(chemical, chemicalSpawnPoint.position, chemicalSpawnPoint.rotation, chemicalSpawnPoint).transform;
+            latestChemical.name = chemical.name;
         }
 
-    }
-
-    private void OnTriggerEnter(Collider col)
-    {
-        Debug.Log("intrigger");
-
-        if (col.gameObject.tag == "Selectable")
+        if (waterinRange)
         {
-            intheway = true;
+            latestSeed = Instantiate(Seed, SeedSpawnPoint.position, SeedSpawnPoint.rotation, SeedSpawnPoint).transform;
+            latestSeed.name = Seed.name;
         }
-        else
-        {
-            intheway = false;
 
+        if (seedinRange)
+        {
+            latestWater = Instantiate(Water, WaterSpawnPoint.position, WaterSpawnPoint.rotation, WaterSpawnPoint).transform;
+            latestWater.name = Water.name;
         }
-    }
 
-    private void OnTriggerStay(Collider col)
-    {
-        Debug.Log("intriggerstay" + col.gameObject.name);
-
-        if (col.gameObject.tag == "Selectable")
+        //-------------
+        if (latestChemical != null)
         {
-            intheway = true;
+            if (Vector3.Distance(latestChemical.position, chemicalSpawnPoint.position) < maximumDistance)
+            {
+                ChemicalinRange = false;
+            }
+            else
+            {
+                ChemicalinRange = true;
+            }
         }
-        else
-        {
-            intheway = false;
-        }
-    }
 
-    private void OnTriggerExit(Collider col)
-    {
-        Debug.Log("exitingtrigger");
-        if (col.gameObject.tag == "Selectable")
+        if (latestSeed != null)
         {
-            intheway = false;
+            if (Vector3.Distance(latestSeed.position, SeedSpawnPoint.position) < maximumDistance)
+            {
+                seedinRange = false;
+            }
+            else
+            {
+                seedinRange = true;
+            }
+        }
+
+        if (latestWater != null)
+        {
+            if (Vector3.Distance(latestWater.position, WaterSpawnPoint.position) < maximumDistance)
+            {
+                waterinRange = false;
+            }
+            else
+            {
+                waterinRange = true;
+            }
         }
     }
 }

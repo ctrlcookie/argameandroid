@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SelectionManager : MonoBehaviour
 {
     public GameObject moveableObject; //current selected object
     public GameObject childSelection;
 
+    public Transform selectionLight;
+
     [SerializeField] public GameObject defaultObject; //object to default to when not selecting anything else/deleting old selection
+
+    public Text selectionText;
 
     //the three below broke stuff in the project when material changing was introduced :(
     //[SerializeField] public Material highlightMaterial; //material for when we're hovering over an item
@@ -20,6 +25,7 @@ public class SelectionManager : MonoBehaviour
     bool selectin = false; //is the player attempting to select right now
     private Transform _selection; // our selection's transform component
 
+    public Vector3 lightOffset;
 
     Camera mainCam;
 
@@ -30,12 +36,16 @@ public class SelectionManager : MonoBehaviour
 
     void FixedUpdate()
     {
+        selectionLight.position = moveableObject.transform.position + lightOffset;
 
-         childSelection = moveableObject.transform.Find("selected").gameObject;
+        if (moveableObject.name != "DefaultSelectionItem")
+        {
+            selectionText.text = "This is a " + moveableObject.name + "!";
+        }
 
         if (selectin)
         {
-            childSelection.GetComponent<SpriteRenderer>().enabled = true;
+           // childSelection.GetComponent<SpriteRenderer>().enabled = true;
         }
 
         var moveableRenderer = moveableObject.GetComponent<Renderer>(); //current selections' renderer
@@ -70,22 +80,18 @@ public class SelectionManager : MonoBehaviour
 
                 if (selectin) //is the player trying to select?
                 {
-                    //Debug.Log("Selecting");
-                    //moveableRenderer.material = defaultMaterial; //change previously selected's material to it's stored default ("unselecting" the old object)
-
-                    childSelection.GetComponent<SpriteRenderer>().enabled = false;
-
                     moveableObject = selection.gameObject; //change the now selected object from the old one
+
+                    moveableObject.transform.position = new Vector3(hit.point.x, moveableObject.transform.position.y, hit.point.z); ;
                 }
 
-                var selectionRenderer = selection.GetComponent<Renderer>();  //get selection's renderer
+               // var selectionRenderer = selection.GetComponent<Renderer>();  //get selection's renderer
 
-                if (selectionRenderer != null) //are we hovering over a selectable object?
-                {
+               // if (selectionRenderer != null) //are we hovering over a selectable object?
+             //   {
                     //defaultMaterial = selection.GetComponent<Renderer>().material; //store the object's default material
                     //selectionRenderer.material = highlightMaterial; //highlight the material as part of the hover
-                }
-
+             //   }
                 _selection = selection; //we selectin?
             }
         }
